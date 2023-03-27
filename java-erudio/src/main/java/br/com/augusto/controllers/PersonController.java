@@ -1,6 +1,5 @@
 package br.com.augusto.controllers;
 
-import br.com.augusto.exceptions.UnsupportedMathOperationException;
 import br.com.augusto.model.Person;
 import br.com.augusto.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person finById(@PathVariable(value = "id") String id) {
+    public Person finById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
 
@@ -37,7 +36,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@PathVariable(value = "id") String id) {
+    public void delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
     }
 }
