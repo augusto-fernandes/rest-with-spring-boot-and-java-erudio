@@ -2,9 +2,11 @@ package br.com.augusto.services;
 
 import br.com.augusto.exceptions.ResourceNotFoundException;
 import br.com.augusto.mapper.DozerMapper;
+import br.com.augusto.mapper.custom.PersonMapper;
 import br.com.augusto.model.Person;
 import br.com.augusto.repositories.PersonRepository;
 import br.com.augusto.vo.v1.PersonVO;
+import br.com.augusto.vo.v2.PersonVOV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class PersonServices {
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    PersonMapper mapper;
 
     public List<PersonVO> findAll(){
         logger.info("Finding all people!");
@@ -38,6 +43,13 @@ public class PersonServices {
         logger.info("Creating one person!");
         var entity = DozerMapper.parseObject(person, Person.class);
         var vo = DozerMapper.parseObject (personRepository.save(entity), PersonVO.class);
+        return vo;
+    }
+
+    public PersonVOV2 createV2(PersonVOV2 person) {
+        logger.info("Creating one person!");
+        var entity = mapper.convertVoToEntity(person);
+        var vo = mapper.convertEntityToVo(personRepository.save(entity));
         return vo;
     }
 
