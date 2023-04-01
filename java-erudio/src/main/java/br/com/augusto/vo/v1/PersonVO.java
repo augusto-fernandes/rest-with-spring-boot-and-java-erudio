@@ -1,5 +1,8 @@
 package br.com.augusto.vo.v1;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -7,15 +10,20 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-
+@JsonPropertyOrder({"id","address", "Primeiro_nome", "Ultimo_nome", "gender"})
 public class PersonVO implements Serializable  {
     @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    @JsonProperty("Primeiro_nome")
+
     private String firstName;
+    @JsonProperty("Ultimo_nome")
+
     private String lastName;
     private String address;
+    @JsonIgnore
     private String gender;
 
     public PersonVO() {}

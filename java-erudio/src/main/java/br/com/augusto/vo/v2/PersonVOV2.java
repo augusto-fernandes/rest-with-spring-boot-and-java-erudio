@@ -1,5 +1,8 @@
 package br.com.augusto.vo.v2;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,9 +14,13 @@ public class PersonVOV2 implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
     private String firstName;
+
     private String lastName;
     private String address;
+
+
     private String gender;
     private Date birthDay;
 
