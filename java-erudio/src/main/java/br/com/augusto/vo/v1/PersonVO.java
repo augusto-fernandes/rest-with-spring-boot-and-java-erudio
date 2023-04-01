@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-@JsonPropertyOrder({"id","address", "Primeiro_nome", "Ultimo_nome", "gender"})
+@JsonPropertyOrder({"id","Primeiro_nome", "Ultimo_nome", "address", "gender"})
 public class PersonVO implements Serializable  {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,6 @@ public class PersonVO implements Serializable  {
 
     private String lastName;
     private String address;
-    @JsonIgnore
     private String gender;
 
     public PersonVO() {}
