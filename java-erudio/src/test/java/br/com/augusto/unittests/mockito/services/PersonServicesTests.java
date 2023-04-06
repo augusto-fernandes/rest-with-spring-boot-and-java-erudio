@@ -2,6 +2,8 @@ package br.com.augusto.unittests.mockito.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+
+import br.com.augusto.exceptions.RequiredObjectIsNullException;
 import br.com.augusto.model.Person;
 import br.com.augusto.repositories.PersonRepository;
 import br.com.augusto.services.PersonServices;
@@ -79,6 +81,18 @@ public class PersonServicesTests {
         assertEquals("Female", result.getGender());
     }
 
+    @Test
+    void testCreateWithNullPerson(){
+
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () ->{
+            services.create(null);
+        });
+        String expectedMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
 
     @Test
     void testUpdate(){
@@ -102,6 +116,19 @@ public class PersonServicesTests {
         assertEquals("Female", result.getGender());
     }
 
+    @Test
+    void testUpdateWithNullPerson(){
+
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () ->{
+            services.create(null);
+        });
+        String expectedMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
+
 
     @Test
     void testDelete(){
@@ -111,5 +138,6 @@ public class PersonServicesTests {
 
          services.delete(1L);
     }
+
 
 }

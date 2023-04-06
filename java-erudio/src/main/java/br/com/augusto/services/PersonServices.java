@@ -1,6 +1,7 @@
 package br.com.augusto.services;
 
 import br.com.augusto.controllers.PersonController;
+import br.com.augusto.exceptions.RequiredObjectIsNullException;
 import br.com.augusto.exceptions.ResourceNotFoundException;
 import br.com.augusto.mapper.DozerMapper;
 import br.com.augusto.mapper.custom.PersonMapper;
@@ -47,6 +48,10 @@ public class PersonServices {
     }
 
     public PersonVO create(PersonVO person) {
+
+        if(person == null) throw new RequiredObjectIsNullException();
+
+
         logger.info("Creating one person!");
         var entity = DozerMapper.parseObject(person, Person.class);
         var vo = DozerMapper.parseObject (personRepository.save(entity), PersonVO.class);
@@ -61,6 +66,7 @@ public class PersonServices {
     }
 
     public PersonVO update(PersonVO person) {
+        if(person == null) throw new RequiredObjectIsNullException();
         logger.info("Updating one person!");
 
        var entity = personRepository.findById(person.getKey())
